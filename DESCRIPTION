@@ -11,7 +11,7 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.4.0)
 Imports:
-    org.Hs.eg.dbx (>= 3.18.0),
+    org.Hs.eg.db (>= 3.18.0),
     MASS (>= 7.3-60),
     Matrix (>= 1.6-4),
     VGAM (>= 1.1-9),
