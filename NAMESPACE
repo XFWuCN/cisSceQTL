@@ -1,1 +1,14 @@
 exportPattern("^[[:alpha:]]+")
+import(org.Hs.eg.db)
+importFrom(MASS,fitdistr)
+importFrom(MASS,glm.nb)
+importFrom(Matrix,Matrix)
+importFrom(VGAM,dzinegbin)
+importFrom(bbmle,mle2)
+importFrom(pscl,zeroinfl)
+importFrom(glmmTMB,glmmTMB)
+importFrom(stats,p.adjust)
+importFrom(stats,pchisq)
+importFrom(stats,plogis)
+
+
