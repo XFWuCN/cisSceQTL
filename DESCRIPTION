@@ -9,3 +9,13 @@ Description: More about what it does (maybe more than one line)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 3.4.0)
+Imports:
+    org.Hs.eg.dbx (>= 3.18.0),
+    MASS (>= 7.3-60),
+    Matrix (>= 1.6-4),
+    VGAM (>= 1.1-9),
+    bbmle (>= 1.0.25.1),
+    pscl (>= 1.5.5.1),
+    glmmTMB (>= 1.1.8),
+    stats (>= 4.3.3)
