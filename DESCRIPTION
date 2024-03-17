@@ -18,4 +18,10 @@ Imports:
     bbmle (>= 1.0.25.1),
     pscl (>= 1.5.5.1),
     glmmTMB (>= 1.1.8),
+    DESeq2 (>= 1.42.0),
+    limma (>= 3.58.1),
+    sctransform (>= 0.4.1),
+    impute (>= 1.76.0),
+    impute (>= 1.76.0),
     stats (>= 4.3.3)
+

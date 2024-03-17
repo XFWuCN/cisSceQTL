@@ -11,6 +11,8 @@
 #' @param gene_ids
 #' @param cisDist
 #' @importFrom org.Hs.eg.db
+#' @importFrom biomaRt useMart getBM useEnsembl mapIds
+#' @importFrom org.Mm.eg.db
 #' @return
 #' @export
 #' @examples

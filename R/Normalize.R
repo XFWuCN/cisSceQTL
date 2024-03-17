@@ -2,35 +2,27 @@
 #'
 #' @param expressionMatrix 基因表达矩阵
 #' @param method 进行标准化的方法，此处有四个方法可选
-#'
+#' @importFrom DESeq2 DESeqDataSetFromMatrix DESeq counts
+#' @importFrom limma normalizeBetweenArrays
+#' @importFrom sctransform vst
 #' @return 返回标准化后的数据
 #' @export
 #'
 #' @examples
-#' 
 #'
 #'
-install.packages("doParallel")
-install.packages("foreach")
-install.packages("iterators")
-install.packages("parallel")
-library(doParallel)
-library(foreach)
-library(iterators)
-library(parallel)
-library("glmGamPoi")
-library("sctransform")
+#'
 
 Normalize <- function(expressionMatrix, method = "sctransform") {
   if (!method %in% c("CPM", "TPM", "DESeq", "limma", "sctransform")) {
     stop("Invalid method. Please choose from 'CPM', 'TPM', 'DESeq','limma' or 'sctransform'.")
   }
-  
+
   # 计算每行的总计数，即每个基因在所有细胞的表达总量
   rowsum = apply(expressionMatrix, 1, sum)
   # 将没有在这个矩阵的任何细胞中表达的基因移除
   expressionMatrix = expressionMatrix[rowsum!=0,]
-  
+
   if (method == "CPM") {
     # CPM normalization for non-zero values
     total_counts <- colSums(expressionMatrix)
@@ -65,18 +57,18 @@ Normalize <- function(expressionMatrix, method = "sctransform") {
     normalized_data <- sctransform::vst(normalized_data)$y
     normalized_data <- floor(normalized_data)
   }
-  
+
   # 输出标准化结果信息
   cat(paste("Normalization completed using method:", method, "\n"))
   cat("Dimensions of normalized data:", dim(normalized_data), "\n")
   cat("Summary statistics of samples:\n")
   colSum <- colSums(normalized_data)
   colMean <- colMeans(normalized_data)
-  
+
   for (i in seq_along(colSum)) {
     cat(paste("\nSample", i, ":\n"," Total count =", colSum[i], "\n","Mean =",colMean[i],"\n"))
   }
-  
+
   return(normalized_data)
 }
 
