@@ -10,10 +10,10 @@ importFrom(glmmTMB,glmmTMB)
 importFrom(stats,p.adjust)
 importFrom(stats,pchisq)
 importFrom(stats,plogis)
-
 importFrom(DESeq2,DESeqDataSetFromMatrix)
 importFrom(DESeq2,DESeq)
 importFrom(DESeq2,counts)
 importFrom(limma,normalizeBetweenArrays)
 importFrom(sctransform,vst)
-
+importFrom("stats", "approx", "dpois", "glm", "lm", "median")
+importFrom("stats", "spline")

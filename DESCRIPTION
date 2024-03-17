@@ -21,7 +21,9 @@ Imports:
     DESeq2 (>= 1.42.0),
     limma (>= 3.58.1),
     sctransform (>= 0.4.1),
-    impute (>= 1.76.0),
-    impute (>= 1.76.0),
+    lme4 (>= 1.1-35.1),
+    nlme (>= 3.1-164),
+    splines (>= 4.3.3),
+    stats4 (>= 4.3.3),
     stats (>= 4.3.3)
 
