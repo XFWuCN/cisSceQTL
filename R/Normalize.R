@@ -26,13 +26,11 @@ Normalize <- function(expressionMatrix, method = "sctransform") {
   if (method == "CPM") {
     # CPM normalization for non-zero values
     total_counts <- colSums(expressionMatrix)
-    cpm_data <- sweep(expressionMatrix, 2, total_counts, "/") * 1e6
-    normalized_data <- floor(cpm_data)  # 将结果向下取整为整数
+    normalized_data <- sweep(expressionMatrix, 2, total_counts, "/") * 1e6
   } else if (method == "TPM") {
     # TPM normalization for non-zero values
     library_size <- colSums(expressionMatrix)
-    tpm_data <- expressionMatrix / library_size * 1e6
-    normalized_data <- floor(tpm_data)  # 将结果取整为整数
+    normalized_data <- expressionMatrix / library_size * 1e6
   } else if (method == "DESeq") {
     # DESeq normalization
     # 先将表达矩阵转换为DESeqDataSet对象
@@ -45,17 +43,14 @@ Normalize <- function(expressionMatrix, method = "sctransform") {
                                   design = ~1)
     dds <- DESeq(dds)
     normalized_data <- counts(dds, normalized = TRUE)
-    normalized_data <- floor(normalized_data)
   } else if (method == "limma") {
     # limma normalization
     library("limma")
     normalized_data <- normalizeBetweenArrays(expressionMatrix, method="quantile")
-    normalized_data <- floor(normalized_data)
   } else if (method == "sctransform") {
     # sctransform normalization
     normalized_data <- as.matrix(expressionMatrix)
     normalized_data <- sctransform::vst(normalized_data)$y
-    normalized_data <- floor(normalized_data)
   }
 
   # 输出标准化结果信息
