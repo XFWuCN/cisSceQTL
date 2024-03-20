@@ -1,8 +1,8 @@
 #' eQTLsc: Uncover single-cell eQTLs exclusively using scRNA-seq data
-#' 仅使用单细胞RNA-seq数据挖掘单细胞eQTLs
+#'
 #'
 #' A function designed to identify eQTLs from scRNA-seq data,
-#'utilizing the eQTLsingle_build_metadata function to generate SNP-gene pair information.
+#' utilizing the eQTLsingle_build_metadata function to generate SNP-gene pair information.
 #' 这个函数用于从单细胞RNA测序数据中识别eQTLs，并利用BuildMetadata函数生成SNP-gene对信息。
 #' @param expressionMatrix 基因表达矩阵
 #' @param metadata gene和snp的pairs
@@ -27,7 +27,7 @@
 #' @export
 
 
-eQTLsc <- function(genedata, snvMatrix = NULL, metadata, sparcity = FALSE, EM = TRUE, p.adjust.method = "bonferroni", useModel = "ZINB", p.adjust.Threshold = 0.05){
+eQTLsc <- function(genedata, snvMatrix = NULL, metadata, sparcity = FALSE, p.adjust.method = "bonferroni", useModel = "ZINB", p.adjust.Threshold = 0.05){
 
   if(class(genedata)[1] == "Seurat"){
     expressionMatrix = as.data.frame(genedata@assays$RNA@data)
@@ -50,7 +50,7 @@ eQTLsc <- function(genedata, snvMatrix = NULL, metadata, sparcity = FALSE, EM = 
     stop("All elements of 'expressionMatrix' are zero")
   }
 
-  LINEAR <- function(expressionMatrix, snvMatrix, metadata, sparcity = FALSE, EM = TRUE, p.adjust.method = "bonferroni", p.adjust.Threshold = 0.05){
+  LINEAR <- function(expressionMatrix, snvMatrix, metadata, sparcity = FALSE, p.adjust.method = "bonferroni", p.adjust.Threshold = 0.05){
 
     result_all <- data.frame()
 
@@ -146,7 +146,7 @@ eQTLsc <- function(genedata, snvMatrix = NULL, metadata, sparcity = FALSE, EM = 
 
 
 
-  ZINB <- function(expressionMatrix, snvMatrix = NULL, metadata, sparcity = FALSE, EM = TRUE, p.adjust.method = "bonferroni", p.adjust.Threshold = 1e-5){
+  ZINB <- function(expressionMatrix, snvMatrix = NULL, metadata, sparcity = FALSE, p.adjust.method = "bonferroni", p.adjust.Threshold = 1e-5){
     # 这里的参数千万不能回车！
 
     # p-value correction methods
@@ -648,7 +648,7 @@ eQTLsc <- function(genedata, snvMatrix = NULL, metadata, sparcity = FALSE, EM = 
   }
 
 
-  POSSION <- function(expressionMatrix, snvMatrix = NULL, metadata, sparcity = FALSE, EM = TRUE, p.adjust.method = "bonferroni", p.adjust.Threshold = 0.05){
+  POSSION <- function(expressionMatrix, snvMatrix = NULL, metadata, sparcity = FALSE, p.adjust.method = "bonferroni", p.adjust.Threshold = 0.05){
 
     unique_group <- unique(metadata$group)
 

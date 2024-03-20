@@ -1,24 +1,25 @@
 #' Title
 #'
-#' @param expressionMatrix 基因表达矩阵
-#' @param method 进行标准化的方法，此处有四个方法可选
+#' @param expressionMatrix A dataframe, describes gene expressions, the row names represent gene IDs and the column names represent cell IDs.
+#' @param method Method for normalizing for gene expression dataframe.
 #' @importFrom DESeq2 DESeqDataSetFromMatrix DESeq counts
 #' @importFrom limma normalizeBetweenArrays
 #' @importFrom sctransform vst
-#' @return 返回标准化后的数据
+#' @return A  normalized gene expression matrix.
 #' @export
 #'
 #' @examples
-#'
-#'
-#'
+#' # Load test data for cisSceQTL
+#' data(testGene)
+#' # normalize the data
+#' normalized_data <- Normalize(testGene, method = "sctransform")
 
 Normalize <- function(expressionMatrix, method = "sctransform") {
   if (!method %in% c("CPM", "TPM", "DESeq", "limma", "sctransform")) {
     stop("Invalid method. Please choose from 'CPM', 'TPM', 'DESeq','limma' or 'sctransform'.")
   }
 
-  # 计算每行的总计数，即每个基因在所有细胞的表达总量
+  # Calculate the total count for each row, which is the total expression level of each gene across all cells
   rowsum = apply(expressionMatrix, 1, sum)
   # 将没有在这个矩阵的任何细胞中表达的基因移除
   expressionMatrix = expressionMatrix[rowsum!=0,]
